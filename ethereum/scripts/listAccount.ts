@@ -5,12 +5,12 @@ import { HDNodeWallet, ethers } from "ethers";
 import QRCode from "qrcode";
 
 const RPC_URLS: Record<string, string> = {
-  sepolia: process.env.RPC_SEPOLIA!,
-  polygon: process.env.RPC_POLYGON!,
-  arbitrum: process.env.RPC_ARBITRUM!,
-  base: process.env.RPC_BASE!,
-  scroll: process.env.RPC_SCROLL!,
-  linea: process.env.RPC_LINEA!,
+  sepolia: "",
+  polygon: "",
+  arbitrum: "",
+  base: "",
+  scroll: "",
+  linea: "",
 };
 
 async function main() {

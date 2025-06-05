@@ -2,7 +2,7 @@ node_modules
 
 # dependencies, yarn, etc
 # yarn / eslint
-.yarn/*
+ethereum/yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
@@ -21,6 +21,6 @@ artifacts
 target
 
 # next
-.next
+node_moedules
 yarn.lock
 

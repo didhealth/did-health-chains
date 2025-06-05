@@ -1,28 +1,41 @@
 {
-  "name": "did:health-chains",
+  "name": "did-health-chains",
   "version": "1.0.0",
   "description": "Multi-chain Ethereum contract deployment using ethers.js and Alchemy",
   "type": "module",
   "scripts": {
-    "deploy": "ts-node scripts/deploy.ts",
-    "generate:contracts": "ts-node scripts/generateDeployedContracts.ts",
-    "compile": "echo 'Use Foundry or solc to compile contracts into /out folder'",
+    "deploy": "tsx scripts/deploy.ts",
+    "gen-contracts": "tsx scripts/generateDeployedContracts.ts",
+    "get-address": "tsx scripts/generate",
+    "generate-account": "tsx scripts/generateAccount.ts",
+    "generate-abi": "tsx scripts/generateTsAbis.ts",
+    "list-account": "tsx scripts/listAccount.ts",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "ethers": "^6.9.0"
+    "@types/jest": "^29.5.14",
+    "dotenv": "^16.5.0",
+    "ethers": "^6.14.3",
+    "fs": "^0.0.1-security",
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
-    "@types/node": "^20.6.0",
+    "@types/chai": "^5.2.2",
+    "@types/dotenv": "^8.2.3",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.15.29",
+    "@types/qrcode": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
+    "chai": "^5.2.0",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
-  }
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "yarn@3.2.3"
 }

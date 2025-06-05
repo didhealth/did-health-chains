@@ -1,6 +1,6 @@
 import { HDNodeWallet } from "ethers";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const mnemonic = process.env.MNEMONIC;
 
