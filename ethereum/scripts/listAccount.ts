@@ -1,41 +1,51 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import { ethers, Wallet } from "ethers";
+
+import { HDNodeWallet, ethers } from "ethers";
 import QRCode from "qrcode";
-import { config } from "hardhat";
+
+const RPC_URLS: Record<string, string> = {
+  sepolia: process.env.RPC_SEPOLIA!,
+  polygon: process.env.RPC_POLYGON!,
+  arbitrum: process.env.RPC_ARBITRUM!,
+  base: process.env.RPC_BASE!,
+  scroll: process.env.RPC_SCROLL!,
+  linea: process.env.RPC_LINEA!,
+};
 
 async function main() {
-  const privateKey = process.env.DEPLOYER_PRIVATE_KEY;
-
-  if (!privateKey) {
-    console.log("🚫️ You don't have a deployer account. Run `yarn generate` first");
+  const mnemonic = process.env.MNEMONIC;
+  if (!mnemonic || mnemonic.split(" ").length < 12) {
+    console.log("🚫️ You don't have a valid mnemonic. Set MNEMONIC in your .env");
     return;
   }
 
-  // Get account from private key.
-  const wallet = new Wallet(privateKey);
+  const wallet = HDNodeWallet.fromPhrase(mnemonic);
   const address = wallet.address;
-  console.log(await QRCode.toString(address, { type: "terminal", small: true }));
-  console.log("Public address:", address, "\n");
 
-  // Balance on each network
-  const availableNetworks = config.networks;
-  for (const networkName in availableNetworks) {
+  console.log(await QRCode.toString(address, { type: "terminal", small: true }));
+  console.log("🆔 Public address:", address, "\n");
+
+  for (const [networkName, rpcUrl] of Object.entries(RPC_URLS)) {
     try {
-      const network = availableNetworks[networkName];
-      if (!("url" in network)) continue;
-      const provider = new ethers.providers.JsonRpcProvider(network.url);
+      const provider = new ethers.JsonRpcProvider(rpcUrl);
       const balance = await provider.getBalance(address);
-      console.log("--", networkName, "-- 📡");
-      console.log("   balance:", +ethers.utils.formatEther(balance));
-      console.log("   nonce:", +(await provider.getTransactionCount(address)));
+      const nonce = await provider.getTransactionCount(address);
+
+      console.log(`-- ${networkName} -- 📡`);
+      console.log("   Balance:", ethers.formatEther(balance), "ETH");
+      console.log("   Nonce:  ", nonce);
     } catch (e) {
-      console.log("Can't connect to network", networkName);
+      if (e instanceof Error) {
+        console.log(`❌ Can't connect to ${networkName}:`, e.message);
+      } else {
+        console.log(`❌ Can't connect to ${networkName}:`, e);
+      }
     }
   }
 }
 
 main().catch(error => {
-  console.error(error);
-  process.exitCode = 1;
+  console.error("Unexpected error:", error);
+  process.exit(1);
 });
