@@ -6,7 +6,7 @@
   "scripts": {
     "deploy": "tsx scripts/deploy.ts",
     "gen-contracts": "tsx scripts/generateDeployedContracts.ts",
-    "get-address": "tsx scripts/generate",
+    "get-address": "tsx scripts/getAddress.ts",
     "generate-account": "tsx scripts/generateAccount.ts",
     "generate-abi": "tsx scripts/generateTsAbis.ts",
     "list-account": "tsx scripts/listAccount.ts",
@@ -37,5 +37,4 @@
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
-
 }
