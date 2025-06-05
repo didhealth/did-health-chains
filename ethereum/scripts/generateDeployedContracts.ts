@@ -5,7 +5,15 @@ import * as prettier from "prettier";
 const DEPLOYMENTS_DIR = path.resolve("deployments");
 const TARGET_PATH = path.resolve("generated", "deployedContracts.ts");
 
-const TESTNET_PREFIXES = ["sepolia", "mumbai", "scrollSepolia", "baseSepolia", "arbitrumSepolia", "polygonMumbai", "lineaSepolia"];
+const TESTNET_PREFIXES = [
+  "sepolia",
+  "mumbai",
+  "scrollSepolia",
+  "baseSepolia",
+  "arbitrumSepolia",
+  "polygonMumbai",
+  "lineaSepolia",
+];
 const MAINNET_PREFIXES = ["mainnet", "ethereum", "polygon", "arbitrum", "base", "scroll", "linea"];
 
 function classifyNetwork(name: string): "testnet" | "mainnet" | "other" {
