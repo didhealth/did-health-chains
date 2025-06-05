@@ -28,7 +28,7 @@ describe("YourContract (pure ethers)", function () {
 
   describe("Deployment", function () {
     it("Should have the right message on deploy", async function () {
-      const greeting = await yourContract.greeting();
+      const greeting = await yourContract.getFunction("greeting")();
       expect(greeting).to.equal("Building Unstoppable Apps!!!");
     });
 

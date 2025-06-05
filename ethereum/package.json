@@ -10,6 +10,7 @@
     "generate-account": "tsx scripts/generateAccount.ts",
     "generate-abi": "tsx scripts/generateTsAbis.ts",
     "list-account": "tsx scripts/listAccount.ts",
+    "test": "tsx scripts/test.ts",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
   },
